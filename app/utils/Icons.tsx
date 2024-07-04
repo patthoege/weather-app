@@ -17,7 +17,9 @@ import {
     Eye,
     UsersRound,
     CalendarDays,
-    Sun, 
+    Sun,
+    CloudLightning,
+    Waves, 
  } from 'lucide-react';
 
 export const commandIcon = <Command size={15} />;
@@ -39,3 +41,5 @@ export const eye = <Eye size={15} />;
 export const people = <UsersRound size={15} />;
 export const calender = <CalendarDays size={15} />;
 export const sun = <Sun size={15} />;
+export const thunderstorm = <CloudLightning size={15} />;
+export const atmosphere = <Waves size={15} />;
