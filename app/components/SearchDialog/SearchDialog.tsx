@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { commandIcon } from "@/app/utils/Icons";
 import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command";
@@ -22,7 +22,8 @@ function SearchDialog() {
                         </div>
                     </Button>
                 </DialogTrigger>
-                <DialogContent className="p-0">
+                <DialogContent className="p-0" aria-describedby="search-dialog-description">
+                <DialogTitle className="sr-only">Search Dialog</DialogTitle>
                     <Command className="rounded-lg border shadow-md">
                         <CommandInput placeholder="Type a command or search..." />
                         <CommandList className="px-3 pb-2">
