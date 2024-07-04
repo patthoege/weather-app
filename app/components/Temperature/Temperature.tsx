@@ -1,8 +1,9 @@
 "use client";
 import { useGlobalContext } from "@/app/context/GlobalContext";
-import { atmosphere, clearSky, cloudy, drizzleIcon, rain, snow, thunderstorm } from "@/app/utils/Icons";
+import { atmosphere, clearSky, cloudy, drizzleIcon, navigation, rain, snow, thunderstorm } from "@/app/utils/Icons";
 import { kelvinToCelsius } from "@/app/utils/misc";
-import React, { useState } from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
 
 
 function Temperature() {
@@ -42,16 +43,42 @@ function Temperature() {
             default:
                 return clearSky;
         }
-    }
+    };
+
+    // Live time update
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const localMoment = moment().utcOffset(timezone / 60);
+            const formatTime = localMoment.format("HH:mm:ss");
+            const weekDay = localMoment.format("dddd");
+
+            setLocalTime(formatTime);
+            setCurrentDay(weekDay);
+        }, 1000);
+    }, [])
 
     return (
-        <div className="pt-6 pb-5 border border-gray-400 rounded-lg flex flex-col justify-between
+        <div className="pt-6 pb-5 px-5 border border-gray-400 rounded-lg flex flex-col justify-between
          dark:bg-dark-grey dark:border-gray-400 shadow-md dark:shadow-none"
         >
             <p className="flex justify-between items-center">
                 <span className="font-medium">{currentDay}</span>
                 <span className="font-medium">{localTime}</span>
             </p>
+            <p className="pt-2 font-bold flex gap-1">
+                <span>{name}</span>
+                <span>{navigation}</span>
+            </p>
+            <p className="py-10 text-9xl font-bold self-center">{temp}°</p>
+            <div>
+                <div>
+                    <span>{getIcon()}</span>
+                    <p className="pt-2 capitalize text-lg font-medium">{description}</p>
+                </div>
+                <p className="flex items-center gap-2">
+                    <span>Low:<strong> {minTemp}° </strong></span> | <span>High:<strong> {maxTemp}° </strong></span> | <span>Humidity: <strong>{main?.humidity}% </strong></span>
+                </p>
+            </div>
         </div>
     );
 }
