@@ -15,7 +15,7 @@ function Population() {
     if (!fiveDaysForecast || !city) {
         return <Skeleton className="h-[12rem] w-full" />;
     }
-    console.log("population data", city);
+    
   return (
     <div className="pt-6 pb-5 px-4 h-[12rem] border border-gray-400 
     rounded-lg flex flex-col gap-8 dark:bg-dark-grey shadow-sm dark:shadow-none">
