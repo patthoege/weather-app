@@ -1,6 +1,7 @@
 import AirPollution from "./components/AirPollution/AirPollution";
 import DailyForecast from "./components/DailyForecast/DailyForecast";
 import FeelsLike from "./components/FeelsLike/FeelsLike";
+import Footer from "./components/Footer/Footer";
 import Humidity from "./components/Humidity/Humidity";
 import Mapbox from "./components/Mapbox/Mapbox";
 import Navbar from "./components/Navbar";
@@ -43,6 +44,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }
