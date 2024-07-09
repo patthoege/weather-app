@@ -6,6 +6,10 @@ export const kelvinToCelsius = (kelvin: number) => {
 
 export const airQualityIndexText = [
     {
+        rating: 10,
+        description: "excellent",
+    },
+    {
         rating: 20,
         text: "good",
     },
