@@ -39,7 +39,7 @@ function AirPollution() {
         max={100} 
         className="progress w-full h-[1.5rem]"
         />
-       <p>Air quality is {arrayQualityIndex?.text} </p>
+       <p className="text-sm">Air quality is {arrayQualityIndex?.description} </p>
     </div>
     );
 }
