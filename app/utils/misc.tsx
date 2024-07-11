@@ -47,3 +47,9 @@ export const formatNumber = (num: number) => {
         return num;
     }
 };
+
+export const UnixToDay = (unix: number) => {
+    return moment
+    .unix(unix)
+    .format("dddd");
+};

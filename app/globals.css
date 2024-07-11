@@ -87,3 +87,11 @@
     );
   }
   
+  .temperature-progress {
+    background-image:linear-gradient(
+      to right, 
+      #3fffc5 0%, 
+      #ffdb3a 45%,
+      #e5405e 100%
+    );
+  }
