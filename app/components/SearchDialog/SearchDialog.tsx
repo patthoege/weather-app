@@ -4,11 +4,18 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/
 import { Button } from "@/components/ui/button";
 import { commandIcon } from "@/app/utils/Icons";
 import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command";
-import { useGlobalContext } from "@/app/context/GlobalContext";
+import { useGlobalContext, useGlobalContextUpdate } from "@/app/context/GlobalContext";
 
 function SearchDialog() {
-    const { geoList, inputValue, handlerInput } = useGlobalContext();
+    const { geoList, inputValue, handleInput } = useGlobalContext();
+    const { setActiveCityCoords } = useGlobalContextUpdate();
     const [ hoveredIndex, setHoveredIndex ] = useState<number>(0);
+
+    const getClickedCoords = (lat: number, lon: number) => {
+        console.log("Setting coordinates:", lat, lon);
+        setActiveCityCoords([lat, lon]);
+      };
+
     return (
         <div className="search-btn">
             <Dialog>
@@ -17,7 +24,7 @@ function SearchDialog() {
                         variant="outline"
                         className="border inline-flex items-center justify-center text-sm font-medium hover:dark:bg-[#131313] hover:bg-slate-100 ease-in-out duration-200"
                     > 
-                        <p className="text-sm text-muted-foreground">Search here...</p>
+                        <p className="text-sm text-muted-foreground">Find location</p>
                         <div 
                             className="command dark:bg-[#262626] bg-slate-200 py-[2px] pl-[5px] pr-[7px] rounded-sm ml-[10rem] flex items-center gap-2">
                             {commandIcon}
@@ -30,30 +37,46 @@ function SearchDialog() {
                     <Command className="rounded-lg border shadow-md">
                         <CommandInput
                             value={inputValue}
-                            onChangeCapture={handlerInput}
-                            placeholder="Type a command or search..."
+                            onChangeCapture={handleInput}
+                            placeholder="Find location"
                         />
-                        <CommandList className="px-3 pb-2">
-                            <CommandItem className="p-2 text-sm text-muted-foreground"></CommandItem>
-                            {geoList.length === 0  && <CommandItem className="p-2 text-sm text-muted-foreground">No results found.</CommandItem>}
+                        <ul className="px-3 pb-2">
+                            <p className="p-2 text-sm text-muted-foreground">Suggestions</p>
 
-                            {geoList.map((item : { name: string; country: string; state: string }, index: number) => { 
-                                const { name, country, state } = item;
+                            {geoList?.length === 0 ||
+                             (!geoList && <p>No results found</p>)}
+
+                            {geoList && 
+                                geoList.map(
+                                    (
+                                        item : { 
+                                            name: string;
+                                            country: string;
+                                            state: string;
+                                            lat: number;
+                                            lon: number;
+                                        },
+                                        index: number
+                                    ) => { 
+                                    const { country, state, name } = item;
                                 return (
-                                    <CommandItem
+                                    <li
                                         key={index}
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         className={`py-3 px-2 text-sm rounded-sm cursor-default
                                             ${hoveredIndex === index ? "bg-accent" : ""}
                                         `}
+                                        onClick={() => {
+                                            getClickedCoords(item.lat, item.lon);
+                                          }}
                                     >
                                         <p className="text">
-                                            {name}, {country}, {state}
-                                        </p>
-                                    </CommandItem>
+                                            {name}, {state && state + ","} {country}
+                                        </p>    
+                                    </li>
                                 );
                             })}
-                        </CommandList>
+                        </ul>
                     </Command>
                 </DialogContent>
             </Dialog>

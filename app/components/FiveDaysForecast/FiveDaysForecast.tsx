@@ -50,7 +50,7 @@ function FiveDaysForecast() {
 
      dailyForecast.push(FiveDaysData(dailyData));
    }
-   console.log("dailyForecast", dailyForecast);
+  //  console.log("dailyForecast", dailyForecast);
   return (
     <div className="pt-6 pb-5 px-4 flex-1 border border-gray-400 rounded-lg flex flex-col justify-between
          dark:bg-dark-grey dark:border-gray-400 shadow-md dark:shadow-none"
