@@ -4,7 +4,7 @@ import FeelsLike from "./components/FeelsLike/FeelsLike";
 import FiveDaysForecast from "./components/FiveDaysForecast/FiveDaysForecast";
 import Footer from "./components/Footer/Footer";
 import Humidity from "./components/Humidity/Humidity";
-import Mapbox from "./components/Mapbox/Mapbox";
+// import Mapbox from "./components/Mapbox/Mapbox";
 import Navbar from "./components/Navbar";
 import Population from "./components/Population/Population";
 import Pressure from "./components/Pressure/Pressure";
@@ -14,9 +14,12 @@ import TopCities from "./components/TopCities/TopCities";
 import UvIndex from "./components/UvIndex/UvIndex";
 import Visibility from "./components/Visibility/Visibility";
 import Wind from "./components/Wind/Wind";
+import dynamic from "next/dynamic";
 
+// Dynamically import the Mapbox component, and disable SSR
+const Mapbox = dynamic(() => import('./components/Mapbox/Mapbox'), { ssr: false });
 
-export default function Home() {
+ export default function Home() {
   return (
     <main className="mx-[1rem] lg:mx-[2rem] xl:mx-[6rem] 2xl:mx-[16rem] m-auto">
       <Navbar />
