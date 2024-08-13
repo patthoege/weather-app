@@ -47,15 +47,22 @@ function Temperature() {
 
     // Live time update
     useEffect(() => {
-        const interval = setInterval(() => {
+        const updateTime = () => {
             const localMoment = moment().utcOffset(timezone / 60);
             const formatTime = localMoment.format("HH:mm:ss");
             const weekDay = localMoment.format("dddd");
 
             setLocalTime(formatTime);
             setCurrentDay(weekDay);
-        }, 1000);
-    }, [])
+        };
+
+        // Update time initially
+        updateTime();
+        // Set interval to update time every second
+        const interval = setInterval(updateTime, 1000);
+        // Clear interval on component unmount
+        return () => clearInterval(interval);
+    }, [timezone]);
 
     return (
         <div className="pt-6 pb-5 px-5 border border-gray-400 rounded-lg flex flex-col justify-between
