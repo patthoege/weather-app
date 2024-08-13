@@ -9,7 +9,6 @@ The live website can be found [here](https://weather-ilyhuxg89-patthoeges-projec
 ## Table of Contents
 + [Features](#features "Features")
   + [Existing Features](#existing-features "Existing Features")
-  + [C.R.U.D](#crud "C.R.U.D")
 + [Testing](#testing "Testing")
   + [Manual Testing](#manual-testing "Manual Testing")
   + [Validator Testing](#validator-testing "Validator Testing")
@@ -23,15 +22,81 @@ The live website can be found [here](https://weather-ilyhuxg89-patthoeges-projec
   + [Hooks](#hooks "Hooks")
   + [Utils](#utils "Utils")
 + [Deployment](#deployment "Deployment")
-  + [Running the project by using Visual Studio Code](#running-the-project-by-using-visual-studio-code "Running the project by using Visual Studio Code")
   + [Deploying with Vercel](#deploying-with-vercel "Deploying with Vercel")
-  + [Connecting Frontend to the API](#connecting-frontend-to-the-api "Connecting Frontend to the API")
-  + [Final Deploy to Vercel](#final-deploy-to-vercel "Final Deploy to Vercel")
 + [Credits](#credits "Credits")
   + [Content](#content "Content")
 
 
 ## Features
+
+### 1. **Current Weather Summary**
+   - **Location and Date:** 
+     - Displays the current city and the day of the week.
+     - Shows the exact time.
+   - **Temperature:**
+     - Large, central temperature display.
+   - **Weather Condition:**
+     - Describes the current weather condition.
+     - Additional details include the day's low and high temperatures Low | High and humidity.
+
+### 2. **Air Pollution Indicator**
+   - **Air Quality Gauge:**
+     - Visual representation of air quality on a color-coded scale (with a pointer at the green/yellow range).
+     - Text indicator below the gauge: "Air quality is".
+
+### 3. **Sunset and Sunrise Times**
+- Indicates the time of sunset and sunrise.
+
+### 4. **Wind Speed and Direction**
+   - **Wind Compass:**
+     - Displays wind direction using a compass with labels (`N`, `S`, `E`, `W`).
+     - Shows the wind speed and the direction.
+
+### 5. **Hourly Temperature Forecast**
+   - **Hourly Breakdown:**
+     - A visual representation of the forecast at different times (`12:00`, `15:00`, `18:00`, `21:00`).
+     - Temperature predictions for each hour.
+### 6. **UV Index Gauge**
+- A color-coded gauge showing the current UV index value.
+- Suggests precautionary measures.
+
+### 7. **Five Days Weather Forecast**
+- Provides a brief forecast for the next five days.
+- Each day displays a range for the expected low and high temperatures.
+
+### 8. **Feels Like Temperature**
+   - **Temperature Perception:**
+     - Shows how the temperature feels like.
+     - Text indicating it feels about the same as the actual temperature.
+
+### 9. **Humidity Level**
+   - **Humidity Indicator:**
+     - Displays the current humidity level.
+     - Notes that the humidity range.
+
+### 10. **Visibility**
+- Displays the visibility distance.
+- Provides the visibility characteristis.
+
+### 11. **Pressure**
+- Displays the current pressure.
+- Provides the pressure description.
+
+### 12. **Population Data**
+- Shows the latest UN population data for current location.
+
+### 13. **Interactive Map**
+- Displays an interactive map of the location, with zoom and pan capabilities.
+
+### 14. **Top Large Cities**
+- Displays a list of top large cities, presumably for quick access to their weather data: `Munich`, `New York`, `Sydney`, `London`, `Madrid`.
+
+### 15. **UI Navigation and Tools**
+- **Location Finder:**
+    - A search bar to find specific locations for weather data.
+- **Settings and Options:**
+    - Buttons to toggle between Fahrenheit and Celsius (`F` and `C`), and access GitHub for source code or repository.
+
 
 [Back to top](<#table-of-contents>)
 
