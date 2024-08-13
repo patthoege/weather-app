@@ -10,12 +10,12 @@ function SearchDialog() {
     const { geoList, inputValue, handleInput } = useGlobalContext();
     const { setActiveCityCoords } = useGlobalContextUpdate();
     const [hoveredIndex, setHoveredIndex] = useState<number>(0);
-    const [isOpen, setIsOpen] = useState(false);  // State to control the dialog visibility
+    const [isOpen, setIsOpen] = useState(false);
 
     const getClickedCoords = (lat: number, lon: number) => {
         console.log("Setting coordinates:", lat, lon);
         setActiveCityCoords([lat, lon]);
-        setIsOpen(false);  // Close the dialog after selecting a city
+        setIsOpen(false);
     };
 
     return (
@@ -25,7 +25,7 @@ function SearchDialog() {
                     <Button 
                         variant="outline"
                         className="border inline-flex items-center justify-center text-sm font-medium hover:dark:bg-[#131313] hover:bg-slate-100 ease-in-out duration-200"
-                        onClick={() => setIsOpen(true)}  // Open the dialog when clicking the button
+                        onClick={() => setIsOpen(true)}
                     > 
                         <p className="text-sm text-muted-foreground">Find location</p>
                         <div 
