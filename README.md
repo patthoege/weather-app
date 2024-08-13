@@ -1,28 +1,128 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">WeatherApp</h1>
+<div align="center"><img src=""></div>
+
+Developed using [Next.js 14](https://nextjs.org/) with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), TypeScript, and Shadcn UI, this real-time weather app offers a seamless user experience. It presents all essential weather information in a beautifully designed, easy-to-navigate interface.
+
+The live website can be found [here](https://weather-ilyhuxg89-patthoeges-projects.vercel.app/ ) 
+
+
+## Table of Contents
++ [Features](#features "Features")
+  + [Existing Features](#existing-features "Existing Features")
+  + [C.R.U.D](#crud "C.R.U.D")
++ [Testing](#testing "Testing")
+  + [Manual Testing](#manual-testing "Manual Testing")
+  + [Validator Testing](#validator-testing "Validator Testing")
+  + [Bugs](#bugs "Bugs")
+  + [Unfixed Bugs](#unfixed-bugs "Unfixed Bugs")
++ [Technologies Used](#technologies-used "Technologies Used")
+  + [Main Languages Used](#main-languages-used "Main Languages Used")
+  + [Frameworks, Libraries & Programs Used](#frameworks-libraries-programs-used "Frameworks, Libraries & Programs Used")
++ [Components](#components "Components")
+  + [Contexts](#contexts "Contexts")
+  + [Hooks](#hooks "Hooks")
+  + [Utils](#utils "Utils")
++ [Deployment](#deployment "Deployment")
+  + [Running the project by using Visual Studio Code](#running-the-project-by-using-visual-studio-code "Running the project by using Visual Studio Code")
+  + [Deploying with Vercel](#deploying-with-vercel "Deploying with Vercel")
+  + [Connecting Frontend to the API](#connecting-frontend-to-the-api "Connecting Frontend to the API")
+  + [Final Deploy to Vercel](#final-deploy-to-vercel "Final Deploy to Vercel")
++ [Credits](#credits "Credits")
+  + [Content](#content "Content")
+
+
+## Features
+
+[Back to top](<#table-of-contents>)
+
+## Testing
+
+### Manual Testing
+
+### Validator Testing
+
+### Unfixed Bugs
+
+### Bugs
+
+| **Bug** | **Error** | **Issue** | **Solution** |
+|---------|-----------|-----------|--------------|
+| Command/Combobox TypeError and Unclickable/Disabled items | TypeError |  When utilizing a Command component, Items are unclickable and disabled | Pin cmdk version to 0.2.1 in package.json [GitHub Issue](https://github.com/shadcn-ui/ui/issues/2944) and leverage `ul` and `li` to list.  |
+| ReferenceError: window is not defined | ReferenceError | Error encountered during build for React Leaflet | Refer to [StackOverflow Solution](https://stackoverflow.com/questions/77658930/having-referenceerror-window-is-not-defined-error-for-react-leaflet-during-buil/77664865#77664865) |
+| Errors during the build process in Next.js | Build Error | API routes relying on dynamic data fail during static rendering. Examples: `Error fetching forecast data` and `Error in getting pollution data` | Use `export const dynamic = 'force-dynamic'` in API route files, it solves the build error |
+
+[Back to top](<#table-of-contents>)
+
+## Technologies Used
+
+### Main Languages Used
+- React
+- Next.js
+- Typescript
+- Tailwind
+
+### Frameworks, Libraries & Programs Used
+
+- [next-themes](https://nextui.org/docs/customization/dark-mode#nextjs-app-directory-setup): comes with two default themes lightand dark
+- [shadcn/ui](https://ui.shadcn.com/): a collection of re-usable components that supports React
+- [Open Weather API](https://openweathermap.org/api): utilized to retrieve and display forecasted weather data
+- [Lucide React](https://lucide.dev/guide/packages/lucide-react): icon library for react applications
+- [Moment](https://www.npmjs.com/package/moment): to manipulate date and time
+- [Axios](https://www.npmjs.com/package/axios): request and fetch data
+- [lodash](https://www.npmjs.com/package/lodash): Geo search delay input changes
+
+[Back to top](<#table-of-contents>)
+
+## Components
+
+Several components have been implemented within this project that have been reused throughout the project:
+
+### Context
+- **GlobalContext.js:** manages and shares global state across various components in the application. 
+    - It defines several asynchronous functions (fetchForecast, fetchAirQuality, fetchFiveDaysForecast, fetchUvIndex) that use axios to fetch weather, air quality, five-day forecast, and UV index data based on geographic coordinates. 
+    - The handleInput function updates the search bar's input value and triggers the fetching of geocode data. This function also uses a debounced effect to optimize the API requests, avoiding unnecessary calls when the user is typing. 
+    - Contains useEffect hooks to fetch data whenever the active city coordinates (activeCityCoords) change, ensuring the app always displays the latest weather and environmental data.
+
+### Provider
+- **ThemeProvider:** is a custom provider that wraps the application with two essential context providers:
+    - The `NextThemesProvider` is imported from the next-themes library, which manages theme switching (e.g., light and dark modes) in a Next.js application. By wrapping the application in NextThemesProvider, this component allows users to toggle between different themes and preserves the selected theme across sessions.
+    - Inside the `NextThemesProvider`, the`GlobalContextProvider` (imported from GlobalContext.js) is used. This provides the global state and functions (like fetching weather data, handling input, etc.) to the entire application.
+
+### Utils
+- **defaultStates.tsx:** defines and exports an array of objects named defaultStates. This array serves as a default list of predefined locations with specific geographic information. 
+- **Icons.tsx:** is a utility file that imports a collection of icons from the lucide-react library and exports them as React components with predefined sizes. This file makes it easier to manage and use icons consistently across the application.
+- **misc.tsx:** contains a set of utility functions and data structures that are used throughout the application to perform common tasks related to temperature conversion, air quality description, date and time formatting, and number formatting. 
+
+### API Routes
+- fivedays
+- geocode
+- pollution
+- uv
+- weather
+
 
 ## Getting Started
 
-First, run the development server:
+##### Create App:
+`npx create-next-app@latest weather-app`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### Run App:
+`npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-
-## Deploy on Vercel
+### Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+[Back to top](<#table-of-contents>)
+
+## Credits
+
+I follow [The Code Dealer FullStack Weather Application Tutorial](https://www.youtube.com/watch?v=rscl9VwwnQg&t=19970s) to learn more and build my first app using Typescript and Next.js
+
+Patricia Höge
