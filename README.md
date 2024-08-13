@@ -1,5 +1,5 @@
 <h1 align="center">WeatherApp</h1>
-<div align="center"><img src=""></div>
+<div align="center"><img src="weather-app-img.png"></div>
 
 Developed using [Next.js 14](https://nextjs.org/) with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), TypeScript, and Shadcn UI, this real-time weather app offers a seamless user experience. It presents all essential weather information in a beautifully designed, easy-to-navigate interface.
 
@@ -188,6 +188,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Credits
 
-I follow [The Code Dealer FullStack Weather Application Tutorial](https://www.youtube.com/watch?v=rscl9VwwnQg&t=19970s) to learn more and build my first app using Typescript and Next.js
+I follow [The Code Dealer FullStack Weather Application Tutorial](https://www.youtube.com/watch?v=rscl9VwwnQg&t=19970s) to learn more and build my first app using Next.js
 
 Patricia Höge
