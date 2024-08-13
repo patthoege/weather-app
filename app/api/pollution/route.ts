@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
     try {
-        const apiKey = process.env.OPENWEATHER_API_KEY;
+        const apiKey = process.env.REACT_APP_WEATHER_Key;
        
         const searchParams = req.nextUrl.searchParams;
         const lat = searchParams.get("lat");
