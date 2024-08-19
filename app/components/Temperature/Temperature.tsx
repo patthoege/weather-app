@@ -5,23 +5,40 @@ import { kelvinToCelsius } from "@/app/utils/misc";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 
-
 function Temperature() {
     const { forecast } = useGlobalContext();
     const { main, timezone, name, weather } = forecast;
 
-    if(!forecast || !weather) {
+    // State
+    const [localTime, setLocalTime] = useState<string>("");
+    const [currentDay, setCurrentDay] = useState<string>("");
+
+    useEffect(() => {
+        if (!timezone) return; // Handle cases where timezone is not yet available
+        const updateTime = () => {
+            const localMoment = moment().utcOffset(timezone / 60);
+            const formatTime = localMoment.format("HH:mm:ss");
+            const weekDay = localMoment.format("dddd");
+
+            setLocalTime(formatTime);
+            setCurrentDay(weekDay);
+        };
+
+        // Update time initially
+        updateTime();
+        // Set interval to update time every second
+        const interval = setInterval(updateTime, 1000);
+        // Clear interval on component unmount
+        return () => clearInterval(interval);
+    }, [timezone]);
+
+    if (!forecast || !weather) {
         return <div>Loading...</div>;
     }
 
     const temp = kelvinToCelsius(main?.temp);
     const minTemp = kelvinToCelsius(main?.temp_min);
     const maxTemp = kelvinToCelsius(main?.temp_max);
-
-    // State
-    const [ localTime, setLocalTime ] = useState<string>("");
-    const [ currentDay, setCurrentDay ] = useState<string>("");
-
     const { main: weatherMain, description } = weather[0];
 
     const getIcon = () => {
@@ -44,25 +61,6 @@ function Temperature() {
                 return clearSky;
         }
     };
-
-    // Live time update
-    useEffect(() => {
-        const updateTime = () => {
-            const localMoment = moment().utcOffset(timezone / 60);
-            const formatTime = localMoment.format("HH:mm:ss");
-            const weekDay = localMoment.format("dddd");
-
-            setLocalTime(formatTime);
-            setCurrentDay(weekDay);
-        };
-
-        // Update time initially
-        updateTime();
-        // Set interval to update time every second
-        const interval = setInterval(updateTime, 1000);
-        // Clear interval on component unmount
-        return () => clearInterval(interval);
-    }, [timezone]);
 
     return (
         <div className="pt-6 pb-5 px-5 border border-gray-400 rounded-lg flex flex-col justify-between
