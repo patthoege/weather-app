@@ -42,7 +42,7 @@ function AirPollution() {
         {arrayQualityIndex ? (
             <p className="text-sm">Air quality is {arrayQualityIndex.text} </p>
         ) : (
-            <p className="text-sm">Air quality data is not available at the moment.</p>
+            <p className="text-sm text-rose-500">Air quality data is not available at the moment.</p>
         )}
     </div>
     );
