@@ -37,7 +37,7 @@ function SearchDialog() {
                 </DialogTrigger>
                 <DialogContent className="p-0" aria-describedby="search-dialog-description">
                     <DialogTitle className="sr-only">Search Dialog</DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="sr-only">
                         Use this dialog to search and select a location from the list.
                     </DialogDescription>
                     <Command className="rounded-lg border shadow-md">
