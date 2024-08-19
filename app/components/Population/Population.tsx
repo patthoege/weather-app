@@ -23,10 +23,12 @@ function Population() {
         <h2 className="flex items-center gap-2 font-medium">
             {people} Population
         </h2>
-        <p className="pt-4 text-2xl">
-            {formatNumber(city.population)}
+        <p className={`pt-4 text-2xl ${!city.population ? 'text-rose-500' : ''}`}>
+            {city.population ? formatNumber(city.population) : "Data not available"}
         </p>
+
       </div>
+
       <p className="text-sm">Latest UN population data for {city.name}</p>
     </div>
   )
