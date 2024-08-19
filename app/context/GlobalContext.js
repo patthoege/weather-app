@@ -63,7 +63,7 @@ export const GlobalContextProvider = ({ children }) => {
 
     // Searchbar input handler
     const handleInput = (e) => {
-        console.log("input", e.target.value)
+        // console.log("input", e.target.value)
         setInputValue(e.target.value);
 
         if(e.target.value === "") {
@@ -73,10 +73,10 @@ export const GlobalContextProvider = ({ children }) => {
 
     // Geocode
     const fetchGeoCodeData = async (search) => {
-        console.log("search geo", search)
+        // console.log("search geo", search)
         try {
             const res = await axios.get(`api/geocode?search=${search}`);
-            console.log("geocode data:", res.data)
+            // console.log("geocode data:", res.data)
             setGeoList(res.data);
         } catch (error) {
             console.log("Error fetchn geo code data", error.message);
@@ -86,7 +86,7 @@ export const GlobalContextProvider = ({ children }) => {
     // debounce function
     useEffect(() => {
         const debouncedFetch = debounce((search) => {
-            console.log("search", search)
+            // console.log("search", search)
           fetchGeoCodeData(search);
         }, 500);
     
@@ -98,7 +98,7 @@ export const GlobalContextProvider = ({ children }) => {
       }, [inputValue]);
 
     useEffect(() => {
-        console.log("Active city coordinates changed:", activeCityCoords); 
+        // console.log("Active city coordinates changed:", activeCityCoords); 
         fetchForecast(activeCityCoords[0], activeCityCoords[1]);
         fetchAirQuality(activeCityCoords[0], activeCityCoords[1]);
         fetchFiveDaysForecast(activeCityCoords[0], activeCityCoords[1]);

@@ -13,7 +13,7 @@ function SearchDialog() {
     const [isOpen, setIsOpen] = useState(false);
 
     const getClickedCoords = (lat: number, lon: number) => {
-        console.log("Setting coordinates:", lat, lon);
+        // console.log("Setting coordinates:", lat, lon);
         setActiveCityCoords([lat, lon]);
         setIsOpen(false);
     };
