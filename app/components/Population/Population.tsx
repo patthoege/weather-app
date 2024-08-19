@@ -23,7 +23,7 @@ function Population() {
         <h2 className="flex items-center gap-2 font-medium">
             {people} Population
         </h2>
-        <p className={`pt-4 text-2xl ${!city.population ? 'text-rose-500' : ''}`}>
+        <p className={`pt-4 text-2xl ${!city.population ? 'text-rose-500 text-lg' : ''}`}>
             {city.population ? formatNumber(city.population) : "Data not available"}
         </p>
 
