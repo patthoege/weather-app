@@ -11,7 +11,8 @@ export const GlobalContextProvider = ({ children }) => {
     const [ forecast, setForecast ] = useState({});
     const [ geoList, setGeoList ] = useState(defaultStates);
     const [ inputValue, setInputValue ] = useState("");
-    const [ activeCityCoords, setActiveCityCoords ] = useState([48.3665, 10.8944]);
+    const [ activeCityCoords, setActiveCityCoords ] = useState([40.7128, -74.0060]);
+    const [loadingLocation, setLoadingLocation] = useState(false);
 
     const [ airQuality, setAirQuality ] = useState({});
     const [ fiveDaysForecast, setFiveDaysForecast ] = useState({});
@@ -97,6 +98,40 @@ export const GlobalContextProvider = ({ children }) => {
         return () => debouncedFetch.cancel();
       }, [inputValue]);
 
+    // get current location
+const handleLocationRequest = async () => {
+    // console.log("Clicked my location button...");
+    setLoadingLocation(true);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            // Set active city coordinates to the current location
+            setActiveCityCoords([lat, lon]);
+
+            // Fetch weather data for the current location
+            await fetchForecast(lat, lon);
+            await fetchAirQuality(lat, lon);
+            await fetchFiveDaysForecast(lat, lon);
+            await fetchUvIndex(lat, lon);
+
+            setLoadingLocation(false);
+        }, (error) => {
+            // console.error("Error getting location", error);
+            alert("Unable to retrieve your location. Please try again.");
+            setActiveCityCoords([40.7128, -74.0060]);
+            setLoadingLocation(false);
+        });
+    } else {
+        // console.error("Geolocation is not supported by this browser.");
+        alert("Geolocation is not supported by your browser.");
+        setActiveCityCoords([40.7128, -74.0060]);
+        setLoadingLocation(false);
+    }
+};
+
     useEffect(() => {
         // console.log("Active city coordinates changed:", activeCityCoords); 
         fetchForecast(activeCityCoords[0], activeCityCoords[1]);
@@ -116,6 +151,8 @@ export const GlobalContextProvider = ({ children }) => {
             inputValue,
             handleInput,
             setActiveCityCoords,
+            handleLocationRequest,
+            loadingLocation,
             }}
        >
           <GlobalContextUpdate.Provider
