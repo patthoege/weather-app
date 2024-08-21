@@ -13,7 +13,8 @@ export const GlobalContextProvider = ({ children }) => {
     const [ inputValue, setInputValue ] = useState("");
     const [ activeCityCoords, setActiveCityCoords ] = useState([40.7128, -74.0060]);
     const [loadingLocation, setLoadingLocation] = useState(false);
-
+    const [alertMessage, setAlertMessage] = useState("");
+    const [alertType, setAlertType] = useState("error");
     const [ airQuality, setAirQuality ] = useState({});
     const [ fiveDaysForecast, setFiveDaysForecast ] = useState({});
     const [ uvIndex, setUvIndex ] = useState({});
@@ -120,13 +121,15 @@ const handleLocationRequest = async () => {
             setLoadingLocation(false);
         }, (error) => {
             // console.error("Error getting location", error);
-            alert("Unable to retrieve your location. Please try again.");
+            setAlertMessage("Unable to retrieve your location. Please try the searchbar.");
+            setAlertType("error");
             setActiveCityCoords([40.7128, -74.0060]);
             setLoadingLocation(false);
         });
     } else {
         // console.error("Geolocation is not supported by this browser.");
-        alert("Geolocation is not supported by your browser.");
+        setAlertMessage("Geolocation is not supported by your browser.");
+        setAlertType("error");
         setActiveCityCoords([40.7128, -74.0060]);
         setLoadingLocation(false);
     }
@@ -139,6 +142,16 @@ const handleLocationRequest = async () => {
         fetchFiveDaysForecast(activeCityCoords[0], activeCityCoords[1]);
         fetchUvIndex(activeCityCoords[0], activeCityCoords[1]);
     }, [activeCityCoords])
+
+    useEffect(() => {
+        if (alertMessage) {
+            const timer = setTimeout(() => {
+                setAlertMessage("");
+            }, 3000);
+            
+            return () => clearTimeout(timer);
+        }
+    }, [alertMessage]);
 
     return (
       <GlobalContext.Provider 
@@ -153,11 +166,15 @@ const handleLocationRequest = async () => {
             setActiveCityCoords,
             handleLocationRequest,
             loadingLocation,
+            alertMessage,
+            alertType,
             }}
        >
           <GlobalContextUpdate.Provider
             value={{ 
-                setActiveCityCoords
+                setActiveCityCoords,
+                setAlertMessage,
+                setAlertType,
             }}
           >
               {children}

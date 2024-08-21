@@ -8,14 +8,23 @@ import ThemeDropdown from './ThemeDropdown/ThemeDropdown';
 import SearchDialog from './SearchDialog/SearchDialog';
 import { useGlobalContext } from '../context/GlobalContext';
 import { locate, locateFixed } from '@/app/utils/Icons';
+import {  Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 
 function Navbar() {
     const router = useRouter();
-    const { state } = useGlobalContext();
+    const { state, alertMessage, alertType } = useGlobalContext();
     const { handleLocationRequest, loadingLocation } = useGlobalContext();
     
     return (
-      <div className="w-full py-4 flex items-center justify-between">
+      <div className="relative w-full py-4 flex items-center justify-between">
+        {alertMessage && (
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-4"> 
+                <Alert variant={alertType} className="bg-black/90 text-white m-2 rounded-lg shadow-lg">
+                    <AlertTitle className='md:font-bold'>{alertType.charAt(0).toUpperCase() + alertType.slice(1)}:</AlertTitle>
+                    <AlertDescription>{alertMessage}</AlertDescription>
+                </Alert>
+            </div>
+        )}
         <div className="left"></div>
             <div className="search-container flex shrink-0 w-full gap-2 sm:w-fit">
                 <SearchDialog />
