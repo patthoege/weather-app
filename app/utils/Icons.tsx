@@ -19,7 +19,9 @@ import {
     CalendarDays,
     Sun,
     CloudLightning,
-    Waves, 
+    Waves,
+    Locate,
+    LocateFixed,
  } from 'lucide-react';
 
 export const commandIcon = <Command size={15} />;
@@ -43,3 +45,5 @@ export const calender = <CalendarDays size={15} />;
 export const sun = <Sun size={15} />;
 export const thunderstorm = <CloudLightning size={15} />;
 export const atmosphere = <Waves size={15} />;
+export const locate = <Locate size={20} />;
+export const locateFixed = <LocateFixed size={20} />;
