@@ -7,17 +7,16 @@ import { githubIcon } from '../utils/Icons';
 import ThemeDropdown from './ThemeDropdown/ThemeDropdown';
 import SearchDialog from './SearchDialog/SearchDialog';
 import { useGlobalContext } from '../context/GlobalContext';
-import LocationButton from './LocationButton/LocationButton';
+import { locate, locateFixed } from '@/app/utils/Icons';
 
 function Navbar() {
     const router = useRouter();
     const { state } = useGlobalContext();
+    const { handleLocationRequest, loadingLocation } = useGlobalContext();
     
     return (
       <div className="w-full py-4 flex items-center justify-between">
-        <div className="left">
-        <LocationButton />
-        </div>
+        <div className="left"></div>
             <div className="search-container flex shrink-0 w-full gap-2 sm:w-fit">
                 <SearchDialog />
                 <div className="btn-group flex items-center gap-2">
@@ -27,6 +26,13 @@ function Navbar() {
                         onClick={() => {router.push("https://www.github.com");}}
                     >
                         {githubIcon} GitHub
+                    </Button>
+                    <Button 
+                        className="source-code flex items-center gap-2"
+                        onClick={handleLocationRequest}
+                        disabled={loadingLocation}
+                    >
+                        {loadingLocation ? locateFixed : locate} My Location
                     </Button>
                 </div>
             </div>
