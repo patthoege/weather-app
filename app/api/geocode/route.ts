@@ -8,18 +8,10 @@ export async function GET(req: NextRequest) {
         const searchParams = req.nextUrl.searchParams;
 
         const city = searchParams.get("search");
-        const lat = searchParams.get("lat");
-        const lon = searchParams.get("lon");
 
-        let url: string;
-
-        // const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
+        const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
 
         if (!city) {
-            url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
-        } else if (lat && lon) {
-            url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit={limit}&appid=${apiKey}`; 
-        } else {
             return new Response("No city provided", { status: 400 });
         }
 

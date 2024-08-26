@@ -1,5 +1,5 @@
 <h1 align="center">WeatherApp</h1>
-<div align="center"><img src="weather-app-img.png"></div>
+<div align="center"><img src="doc/weather-app-img.png"></div>
 
 Developed using [Next.js 14](https://nextjs.org/) with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), TypeScript, and Shadcn UI, this real-time weather app offers a seamless user experience. It presents all essential weather information in a beautifully designed, easy-to-navigate interface.
 
@@ -11,7 +11,6 @@ The live website can be found [here](https://weather-ilyhuxg89-patthoeges-projec
   + [Existing Features](#existing-features "Existing Features")
 + [Testing](#testing "Testing")
   + [Manual Testing](#manual-testing "Manual Testing")
-  + [Validator Testing](#validator-testing "Validator Testing")
   + [Bugs](#bugs "Bugs")
   + [Unfixed Bugs](#unfixed-bugs "Unfixed Bugs")
 + [Technologies Used](#technologies-used "Technologies Used")
@@ -84,7 +83,7 @@ The live website can be found [here](https://weather-ilyhuxg89-patthoeges-projec
 
 ### 12. **Population Data**
 - Shows the latest UN population data for current location.
-
+  
 ### 13. **Interactive Map**
 - Displays an interactive map of the location, with zoom and pan capabilities.
 
@@ -92,11 +91,16 @@ The live website can be found [here](https://weather-ilyhuxg89-patthoeges-projec
 - Displays a list of top large cities, presumably for quick access to their weather data: `Munich`, `New York`, `Sydney`, `London`, `Madrid`.
 
 ### 15. **UI Navigation and Tools**
-- **Location Finder:**
-    - A search bar to find specific locations for weather data.
-- **Settings and Options:**
-    - Buttons to toggle between Fahrenheit and Celsius (`F` and `C`), and access GitHub for source code or repository.
-
+- **Search bar:**
+    - A search bar to find specific locations for weather data. This enhances accessibility by keeping search functionality readily available
+- **Theme Dropdown:**
+    -  Provides users with the option to switch between different themes, enabling them to customize the appearance of the application according to their preferences.
+- **GitHub:**
+    -  A button with the GitHub icon that navigates the user to the GitHub page when clicked.
+- **My Location:**
+    -  A button that triggers the handleLocationRequest function to fetch the user's location. The button displays different icons based on whether the location request is loading or completed.
+- **Alert Message Display:**
+    - the Navbar will display an alert box at the top center of the screen. This alert includes a title and description based on the alertType and alertMessage values from the global context, providing important feedback to the user.
 
 [Back to top](<#table-of-contents>)
 
@@ -104,7 +108,7 @@ The live website can be found [here](https://weather-ilyhuxg89-patthoeges-projec
 
 ### Manual Testing
 
-### Validator Testing
+A separate document for testing can be viewed here: [MANUAL-TESTING.md](doc/MANUAL-TESTING.md)
 
 ### Unfixed Bugs
 
@@ -115,6 +119,8 @@ The live website can be found [here](https://weather-ilyhuxg89-patthoeges-projec
 | Command/Combobox TypeError and Unclickable/Disabled items | TypeError |  When utilizing a Command component, Items are unclickable and disabled | Pin cmdk version to 0.2.1 in package.json [GitHub Issue](https://github.com/shadcn-ui/ui/issues/2944) and leverage `ul` and `li` to list.  |
 | ReferenceError: window is not defined | ReferenceError | Error encountered during build for React Leaflet | Refer to [StackOverflow Solution](https://stackoverflow.com/questions/77658930/having-referenceerror-window-is-not-defined-error-for-react-leaflet-during-buil/77664865#77664865) |
 | Errors during the build process in Next.js | Build Error | API routes relying on dynamic data fail during static rendering. Examples: `Error fetching forecast data` and `Error in getting pollution data` | Use `export const dynamic = 'force-dynamic'` in API route files, it solves the build error |
+
+More issues stories ressolved are also documented [here](https://github.com/patthoege/weather-app/issues?q=is%3Aissue+is%3Aclosed)
 
 [Back to top](<#table-of-contents>)
 
